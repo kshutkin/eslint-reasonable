@@ -1,0 +1,28 @@
+{
+  "version": "0.0.0",
+  "license": "MIT",
+  "name": "@eslint-reasonable/javascript",
+  "author": {
+    "name": "Konstantin Shutkin"
+  },
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kshutkin/eslint-reasonable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kshutkin/eslint-reasonable/issues"
+  },
+  "homepage": "https://github.com/kshutkin/eslint-reasonable/blob/main/javascript/README.md",
+  "readme": "README.md",
+  "description": "Javascript rules.",
+  "keywords": [
+    "eslint",
+    "config",
+    "rules"
+  ]
+}

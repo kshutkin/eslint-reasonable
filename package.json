@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kshutkin/eslint-reasonable.git"
+  },
+  "scripts": {
+    "build": "pnpm --aggregate-output --reporter=append-only --stream -r build",
+    "test": "pnpm --aggregate-output --reporter=append-only --stream --parallel -r test",
+    "lint": "pnpm --aggregate-output --reporter=append-only --stream --parallel -r lint",
+    "ci:publish": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.1",
+    "eslint": "^8.37.0"
+  }
+}
