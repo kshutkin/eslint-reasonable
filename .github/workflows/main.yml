@@ -27,29 +27,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x]
-
-    steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
-      - run: pnpm run lint
-      - run: pnpm run build
-      - run: pnpm test
-
   publish:
 
     if: github.ref_name == 'main'
@@ -71,7 +48,6 @@ jobs:
           scope: '@eslint-reasonable'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
-      - run: pnpm run build
       - name: create and publish versions
         uses: changesets/action@v1
         with:
