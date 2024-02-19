@@ -37,9 +37,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
         with:
-          version: 7
+            fetch-depth: 0
+      - run: corepack enable
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -49,6 +49,12 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run build
       - run: pnpm test
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.node-version }}
+          path: |
+            */dist
 
   publish:
 
@@ -60,9 +66,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
         with:
-          version: 7
+          fetch-depth: 0
+      - run: corepack enable
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -70,8 +76,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@eslint-reasonable'
           cache: 'pnpm'
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist-20.x
+          path: .
       - run: pnpm install --frozen-lockfile --prefer-offline --reporter=append-only
-      - run: pnpm run build
       - name: create and publish versions
         uses: changesets/action@v1
         with:
